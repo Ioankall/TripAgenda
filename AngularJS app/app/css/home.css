@@ -1,0 +1,38 @@
+#homepage{
+	background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url("../img/loginBackground3.jpg") no-repeat center center fixed;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+	background-size: cover;
+	color: white;
+	height:96vh;
+	width:100%;
+	display: table;
+	position: absolute;
+}
+
+#middleLevel{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#innerWindow{
+	background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), no-repeat center center fixed; 
+	margin-left: auto;
+	margin-right: auto;
+	height: 60vh;
+	width:50%;
+	min-height: 550px;
+	min-width: 800px;
+	padding: 2% 5% 0 5%;
+}
+
+#title {
+	margin-bottom: 5%;
+}
+
+#savedtrips{
+	min-height: 320px;
+	height: 32vh;
+	overflow: auto;
+	margin-bottom: 3vh;
+}

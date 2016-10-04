@@ -1,0 +1,61 @@
+#topBar{
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    float: right;
+    background-color: white;
+    height: 7vh;
+    width: 100%;
+    margin: 0;
+}
+
+#topBarText{
+    color: grey;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+}
+
+#mainContent{
+    width: 100%;
+    height: 85vh;
+    padding: 0;
+    margin: 0;
+}
+
+#selectedVenues{
+    padding: 0;
+    background-color: #e6e6e6;
+    height: 85vh;
+    margin: 0;
+    overflow: auto;
+    border-style: solid;
+    border-color: white;
+    border-width: 0 10px 0 0px;
+}
+
+#information{
+    background-color: #e6e6e6;
+    height: 85vh;
+    overflow: auto;
+    padding: 0;
+
+}
+
+#scheduledActivities{
+    border-style: solid;
+    border-color: white;
+    border-width: 0 0px 0 10px;
+    padding: 0;
+    background-color: #e6e6e6;
+    height: 85vh;
+    overflow: auto;
+    margin: 0;
+}
+
+.subtitle{
+    width: 100%;
+    margin: 0;
+    height: 7vh;
+    background-color: #d9d9d9;
+    padding-top: 1vh;
+}

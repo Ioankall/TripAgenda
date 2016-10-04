@@ -1,0 +1,114 @@
+#topBar{
+    padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+    float: right;
+    background-color: white;
+    height: 7vh;
+    width: 100%;
+    margin: 0;
+}
+
+#topBarText{
+    color: grey;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1vh;
+}
+
+#choices{
+    height: 85vh;
+    background-color: #e6e6e6;
+    padding: 0;
+    overflow: auto;
+}
+
+#choicesHeader{
+    height: 8vh;
+    background-color: #d9d9d9;
+    width: 100%;
+}
+
+.venueShortDescription{
+    padding: 1vh;
+    width: 90%;
+    min-height: 16vh;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.3vh;
+    margin-bottom: 1.3vh;
+    background-color: white;
+}
+
+.venueShortDescriptionText{
+    padding: 0;
+    margin: 0;
+}
+
+#addToScheduleBtn{
+    float: right;
+}
+
+#schedulerSide{
+    position: relative;
+    height: 85vh;
+    padding: 0;
+    margin-bottom: 0;
+    background-color:#e6e6e6;
+    border: 4px solid white;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+}
+
+#controls{
+    width: 100%;
+    height: 45vh;
+    background-color: #e6e6e6;
+    border-bottom: 4px solid white;
+}
+
+#schedule{
+    bottom: 0;
+    width: 100%;
+    padding: 0;
+    height: 40vh;
+}
+
+#unavailabilityControls{
+    border-bottom: 4px solid white;
+    height: 15vh;
+}
+
+.unavailabilityControlsElement{
+    margin: 3vh 0 3vh 0;
+    float: left;
+    width:20%;
+    margin-left: 4%;
+}
+
+#scheduleContainer{
+    width: 100%;
+    height: 25vh;
+    overflow: scroll;
+    padding-bottom: 1vh;
+}
+
+#scheduleTable{
+    padding: 0;
+    margin: 0;
+    table-layout: fixed;
+    width: 100%;
+    overflow: scroll;
+
+}
+
+
+.tableRow{
+    height: 3em;
+}
+
+.tableCollumn{
+    width: 15em;
+    text-align: center;
+}
+

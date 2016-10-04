@@ -1,0 +1,397 @@
+<div ng-controller="SchedulerCtrl">
+
+    <div id='topBar'>
+        <div class='col-md-6'>
+            <h4 id='topBarText'>You can easily create a schedule for your trip!    When you are ready just...</h4>
+        </div>
+        <div class='col-md-4'>
+            <div class='col-md-7'>
+                <h4 id='topBarText'>When you are ready just...</h4>
+            </div>
+            <div class='col-md-5'>
+                <center><button style="width:100%;" id='finalizeButton' type="button" ng-click="finalize()" class="btn btn-success">Save trip</button></center>
+            </div>
+        </div>
+        <div class='col-md-2'>
+            <center><button style="width:100%;" id='finalizeButton' type="button" ng-click="deleteCurrentTrip()" class="btn btn-danger">Cancel trip</button></center>
+        </div>
+    </div>
+
+    <div class="col-md-4" id="choices">
+
+        <div id="choicesHeader">
+            <div class="col-md-6"
+                <center>
+                    <select ng-model="chosenCategory" class="form-control" style="height: 4vh;margin-top:2vh;width:100%;" ng-change="updateCategory()">
+                        <option value="" disabled selected hidden>General category</option>
+                        <option ng-repeat="category in generalCategoriesList" value="{{ category }}">
+                            {{ category }}
+                        </option>
+                    </select>
+                </center>
+            </div>
+
+            <div class="col-md-6"
+                <center>
+                    <select ng-model="chosenSubCategory" class="form-control" style="height: 4vh;margin-top:2vh;width:100%;" ng-change="updateSubCategory()">
+                       <option value="" disabled selected hidden>Sub-category</option>
+                       <option value="all">All venues</option>
+                       <option ng-repeat="category in subCategoriesList" value="{{ category }}">
+                           {{ category }}
+                       </option>
+                    </select>
+                </center>
+            </div>
+
+        </div>
+
+        <div id="choicesBody">
+
+            <div class="venueShortDescription" ng-repeat="venue in listOfDisplayedVenues" ng-click="addToSchedule(venue)">
+                <div class="col-md-4">
+                    <img src="{{venue.photos[0]}}" alt="{{venue.name}} photo" style="height:14vh;width:100%;" />
+                </div>
+                <div class="col-md-8 venueShortDescriptionText">
+                    <h4>{{venue.name}}</h4>
+                    <p> <strong>Category:</strong> {{venue.categories}}</p>
+                    <p> <strong>Location:</strong> {{venue.address}}, {{venue.postalCode}}, {{venue.city}}</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-8" id="schedulerSide">
+
+        <div id="unavailabilityControls">
+
+            <div class="unavailabilityControlsElement">
+                <label for="firstDayArrival">Arrival at first day:</label>
+                <select class="form-control" name="firstDayArrival" ng-model="firstDayArrival" ng-change="refreshScheduleDisplay()">
+                    <option value="1">01:00</option>
+                    <option value="2">02:00</option>
+                    <option value="3">03:00</option>
+                    <option value="4">04:00</option>
+                    <option value="5">05:00</option>
+                    <option value="6">06:00</option>
+                    <option value="7">07:00</option>
+                    <option value="8">08:00</option>
+                    <option value="9">09:00</option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="15">15:00</option>
+                    <option value="16">16:00</option>
+                    <option value="17">17:00</option>
+                    <option value="18">18:00</option>
+                    <option value="19">19:00</option>
+                    <option value="20">20:00</option>
+                    <option value="21">21:00</option>
+                    <option value="22">22:00</option>
+                    <option value="23">23:00</option>
+                    <option value="24">00:00</option>
+                </select>
+            </div>
+
+            <div class="unavailabilityControlsElement">
+                <label for="lastDayDeparture">Departure at last day:</label>
+                <select class="form-control" name="lastDayDeparture" ng-model="lastDayDeparture" ng-change="refreshScheduleDisplay()">
+                    <option value="1">01:00</option>
+                    <option value="2">02:00</option>
+                    <option value="3">03:00</option>
+                    <option value="4">04:00</option>
+                    <option value="5">05:00</option>
+                    <option value="6">06:00</option>
+                    <option value="7">07:00</option>
+                    <option value="8">08:00</option>
+                    <option value="9">09:00</option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="15">15:00</option>
+                    <option value="16">16:00</option>
+                    <option value="17">17:00</option>
+                    <option value="18">18:00</option>
+                    <option value="19">19:00</option>
+                    <option value="20">20:00</option>
+                    <option value="21">21:00</option>
+                    <option value="22">22:00</option>
+                    <option value="23">23:00</option>
+                    <option value="24">00:00</option>
+                </select>
+            </div>
+
+            <div class="unavailabilityControlsElement">
+                <label for="startingRestTime">Rest time starts at:</label>
+                <select class="form-control" name="startingRestTime" ng-model="startingRestTime" ng-change="refreshScheduleDisplay()">
+                    <option value="1">01:00</option>
+                    <option value="2">02:00</option>
+                    <option value="3">03:00</option>
+                    <option value="4">04:00</option>
+                    <option value="5">05:00</option>
+                    <option value="6">06:00</option>
+                    <option value="7">07:00</option>
+                    <option value="8">08:00</option>
+                    <option value="9">09:00</option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="15">15:00</option>
+                    <option value="16">16:00</option>
+                    <option value="17">17:00</option>
+                    <option value="18">18:00</option>
+                    <option value="19">19:00</option>
+                    <option value="20">20:00</option>
+                    <option value="21">21:00</option>
+                    <option value="22">22:00</option>
+                    <option value="23">23:00</option>
+                    <option value="24">00:00</option>
+                </select>
+            </div>
+
+            <div class="unavailabilityControlsElement">
+                <label for="endingRestTime">Rest time ends at:</label>
+                <select class="form-control" name="endingRestTime"  ng-model="endingRestTime" ng-change="refreshScheduleDisplay()">
+                    <option value="1">01:00</option>
+                    <option value="2">02:00</option>
+                    <option value="3">03:00</option>
+                    <option value="4">04:00</option>
+                    <option value="5">05:00</option>
+                    <option value="6">06:00</option>
+                    <option value="7">07:00</option>
+                    <option value="8">08:00</option>
+                    <option value="9">09:00</option>
+                    <option value="10">10:00</option>
+                    <option value="11">11:00</option>
+                    <option value="12">12:00</option>
+                    <option value="13">13:00</option>
+                    <option value="14">14:00</option>
+                    <option value="15">15:00</option>
+                    <option value="16">16:00</option>
+                    <option value="17">17:00</option>
+                    <option value="18">18:00</option>
+                    <option value="19">19:00</option>
+                    <option value="20">20:00</option>
+                    <option value="21">21:00</option>
+                    <option value="22">22:00</option>
+                    <option value="23">23:00</option>
+                    <option value="24">00:00</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div id="controls">
+
+            <div id="addToSchedule" style="padding:1%;" ng-show="selectedForAddingVenue">
+
+
+                <div class="col-md-6">
+
+                    <div id="activityNameId" class="col-md-12" style="margin-bottom:2vh;">
+                        <div class="col-md-4">
+                            <p style="padding-top: 2px;">Activity name:</p>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" style="width:100%;" ng-model="activityName">
+                        </div>
+                    </div>
+
+                    <div id="venueName" class="col-md-12" style="margin-bottom:2vh;">
+                        <div class="col-md-4">
+                            <p style="padding-top: 2px;">Venue name:</p>
+                        </div>
+
+                        <div class="col-md-8">
+                            <p ng-model="venueName" style="width:100%;font-weight: bold;padding-top: 2px;">{{selectedForAddingVenue["name"]}}</p>
+                        </div>
+                    </div>
+
+                    <div id="venueCategory" class="col-md-12" style="margin-bottom:2vh;">
+                        <div class="col-md-4">
+                            <p style="padding-top: 2px;">Category:</p>
+                        </div>
+
+                        <div class="col-md-8">
+                            <p ng-model="venueCategory" style="width:100%;font-weight: bold;padding-top: 2px;">{{selectedForAddingVenue["generalCategory"]}}</p>
+                        </div>
+                    </div>
+
+                    <div id="activityDay" class="col-md-12" style="margin-bottom:2vh;">
+                        <div class="col-md-4">
+                            <p style="padding-top:7px;">Day:</p>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="activityDay" ng-model="activityDay">
+                                <option ng-repeat="day in schedule" value="{{day[1]}}">{{day[0]}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="activityStartingTime" class="col-md-12" style="margin-bottom:2vh;">
+                        <div class="col-md-4">
+                             <p style="padding-top:7px;">Starting time:</p>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="activityStartingTime" ng-model="activityStartingTime">
+                                <option value="24">00:00</option>
+                                <option value="1">01:00</option>
+                                <option value="2">02:00</option>
+                                <option value="3">03:00</option>
+                                <option value="4">04:00</option>
+                                <option value="5">05:00</option>
+                                <option value="6">06:00</option>
+                                <option value="7">07:00</option>
+                                <option value="8">08:00</option>
+                                <option value="9">09:00</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="12">12:00</option>
+                                <option value="13">13:00</option>
+                                <option value="14">14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                                <option value="17">17:00</option>
+                                <option value="18">18:00</option>
+                                <option value="19">19:00</option>
+                                <option value="20">20:00</option>
+                                <option value="21">21:00</option>
+                                <option value="22">22:00</option>
+                                <option value="23">23:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="activityEndingTime" class="col-md-12" style="margin-bottom:2vh;">
+                        <div class="col-md-4">
+                            <p style="padding-top:7px;">Ending time:</p>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control" name="activityEndingTime" ng-model="activityEndingTime">
+                                <option value="24">00:00</option>
+                                <option value="1">01:00</option>
+                                <option value="2">02:00</option>
+                                <option value="3">03:00</option>
+                                <option value="4">04:00</option>
+                                <option value="5">05:00</option>
+                                <option value="6">06:00</option>
+                                <option value="7">07:00</option>
+                                <option value="8">08:00</option>
+                                <option value="9">09:00</option>
+                                <option value="10">10:00</option>
+                                <option value="11">11:00</option>
+                                <option value="12">12:00</option>
+                                <option value="13">13:00</option>
+                                <option value="14">14:00</option>
+                                <option value="15">15:00</option>
+                                <option value="16">16:00</option>
+                                <option value="17">17:00</option>
+                                <option value="18">18:00</option>
+                                <option value="19">19:00</option>
+                                <option value="20">20:00</option>
+                                <option value="21">21:00</option>
+                                <option value="22">22:00</option>
+                                <option value="23">23:00</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <p>Notes:</p>
+                    <textarea style="width:100%;height:26vh;resize: none;" ng-model="activityNotes"></textarea>
+                    <center><button style="margin-top:3vh;" id='addToSchedule' type="button" ng-click="addToScheduleFinal(venue)" class="btn btn-success">Add to Schedule</button></center>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+        <div id="schedule">
+
+
+
+            <div id="scheduleContainer">
+
+                <table id="scheduleTable" class="table table-bordered table-condensed" ng-show="dates">
+                    <tr>
+                    <th style="width: 5em;">Day #</th>
+                    <th class="tableCollumn" ng-show="showCollumn[0]">00:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[1]">01:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[2]">02:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[3]">03:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[4]">04:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[5]">05:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[6]">06:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[7]">07:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[8]">08:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[9]">09:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[10]">10:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[11]">11:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[12]">12:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[13]">13:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[14]">14:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[15]">15:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[16]">16:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[17]">17:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[18]">18:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[19]">19:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[20]">20:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[21]">21:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[22]">22:00</th>
+                    <th class="tableCollumn" ng-show="showCollumn[23]">23:00</th>
+                </tr>
+
+                    <tr ng-repeat="day in schedule" id="{{day[1]}}"  class="tableRow">
+                    <th>{{day[0]}}</th>
+                    <td id="{{day[1]}}_0" class="0" ng-show="showCollumn[0]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][0])"><center>{{scheduleActivitiesArray[day[1]][0]}}</center></td>
+                    <td id="{{day[1]}}_1" class="1" ng-show="showCollumn[1]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][1])"><center>{{scheduleActivitiesArray[day[1]][1]}}</center></td>
+                    <td id="{{day[1]}}_2" class="2" ng-show="showCollumn[2]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][2])"><center>{{scheduleActivitiesArray[day[1]][2]}}</center></td>
+                    <td id="{{day[1]}}_3" class="3" ng-show="showCollumn[3]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][3])"><center>{{scheduleActivitiesArray[day[1]][3]}}</center></td>
+                    <td id="{{day[1]}}_4" class="4" ng-show="showCollumn[4]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][4])"><center>{{scheduleActivitiesArray[day[1]][4]}}</center></td>
+                    <td id="{{day[1]}}_5" class="5" ng-show="showCollumn[5]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][5])"><center>{{scheduleActivitiesArray[day[1]][5]}}</center></td>
+                    <td id="{{day[1]}}_6" class="6" ng-show="showCollumn[6]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][6])"><center>{{scheduleActivitiesArray[day[1]][6]}}</center></td>
+                    <td id="{{day[1]}}_7" class="7" ng-show="showCollumn[7]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][7])"><center>{{scheduleActivitiesArray[day[1]][7]}}</center></td>
+                    <td id="{{day[1]}}_8" class="8" ng-show="showCollumn[8]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][8])"><center>{{scheduleActivitiesArray[day[1]][8]}}</center></td>
+                    <td id="{{day[1]}}_9" class="9" ng-show="showCollumn[9]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][9])"><center>{{scheduleActivitiesArray[day[1]][9]}}</center></td>
+                    <td id="{{day[1]}}_10" class="10" ng-show="showCollumn[10]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][10])"><center>{{scheduleActivitiesArray[day[1]][10]}}</center></td>
+                    <td id="{{day[1]}}_11" class="11" ng-show="showCollumn[11]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][11])"><center>{{scheduleActivitiesArray[day[1]][11]}}</center></td>
+                    <td id="{{day[1]}}_12" class="12" ng-show="showCollumn[12]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][12])"><center>{{scheduleActivitiesArray[day[1]][12]}}</center></td>
+                    <td id="{{day[1]}}_13" class="13" ng-show="showCollumn[13]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][13])"><center>{{scheduleActivitiesArray[day[1]][13]}}</center></td>
+                    <td id="{{day[1]}}_14" class="14" ng-show="showCollumn[14]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][14])"><center>{{scheduleActivitiesArray[day[1]][14]}}</center></td>
+                    <td id="{{day[1]}}_15" class="15" ng-show="showCollumn[15]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][15])"><center>{{scheduleActivitiesArray[day[1]][15]}}</center></td>
+                    <td id="{{day[1]}}_16" class="16" ng-show="showCollumn[16]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][16])"><center>{{scheduleActivitiesArray[day[1]][16]}}</center></td>
+                    <td id="{{day[1]}}_17" class="17" ng-show="showCollumn[17]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][17])"><center>{{scheduleActivitiesArray[day[1]][17]}}</center></td>
+                    <td id="{{day[1]}}_18" class="18" ng-show="showCollumn[18]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][18])"><center>{{scheduleActivitiesArray[day[1]][18]}}</center></td>
+                    <td id="{{day[1]}}_19" class="19" ng-show="showCollumn[19]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][19])"><center>{{scheduleActivitiesArray[day[1]][19]}}</center></td>
+                    <td id="{{day[1]}}_20" class="20" ng-show="showCollumn[20]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][20])"><center>{{scheduleActivitiesArray[day[1]][20]}}</center></td>
+                    <td id="{{day[1]}}_21" class="21" ng-show="showCollumn[21]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][21])"><center>{{scheduleActivitiesArray[day[1]][21]}}</center></td>
+                    <td id="{{day[1]}}_22" class="22" ng-show="showCollumn[22]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][22])"><center>{{scheduleActivitiesArray[day[1]][22]}}</center></td>
+                    <td id="{{day[1]}}_23" class="23" ng-show="showCollumn[23]" ng-click="deleteActivityFromSchedule(scheduleActivitiesArray[day[1]][23])"><center>{{scheduleActivitiesArray[day[1]][23]}}</center></td>
+                </tr>
+
+                </table>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>

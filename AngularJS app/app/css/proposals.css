@@ -1,0 +1,112 @@
+#proposalsContainer{
+	background-color: grey; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	background-size: cover;
+    background-color: white;
+	color: black;
+	height:100vh;
+	margin: 0;
+	padding: 0;
+}
+
+#leftSide{
+	padding: 0;
+}
+
+#topBar{
+	padding-top: 1.5vh;
+	padding-bottom: 1.5vh;
+	float: right;
+	background-color: white;
+	height: 7vh;
+	width: 100%;
+	margin: 0;
+}
+
+#topBarText{
+	color: grey;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1vh;
+}
+
+#mainContent{
+	width: 100%;
+	height: 85vh;
+	padding: 0;
+	margin: 0;
+}
+
+#firstCollumnPresent{
+	padding: 0;
+	background-color: #e6e6e6;
+	height: 85vh;
+	overflow: auto;
+}
+
+.venueShortDescription{
+    padding: 1vh;
+    width: 90%;
+    min-height: 16vh;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.3vh;
+    margin-bottom: 1.3vh;
+    background-color: white;
+}
+
+.venueShortDescriptionText{
+    padding: 0;
+    margin: 0;
+}
+
+#secondCollumnPresent{
+    border-style: solid;
+    border-color: white;
+    border-width: 0 10px 0 10px;
+    background-color: #e6e6e6;
+    height: 85vh;
+    overflow: auto;
+    padding: 0;
+
+}
+
+#displayedVenueTitle{
+    background-color: #d9d9d9;
+    width: 100%;
+    margin:0;
+    height: 7vh;
+    padding: 1vh;
+}
+
+#thirdCollumn{
+    background-color: #e6e6e6;
+    padding: 0;
+}
+
+#SelectedVenuesHeader{
+    width: 100%;
+    margin: 0;
+    height: 7vh;
+    background-color: #d9d9d9;
+    padding-top: 1vh;
+}
+#SelectedVenuesList{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 70vh;
+    overflow: auto;
+    background-color: #e6e6e6;
+}
+
+#SelectedVenuesFooter{
+    width: 100%;
+    margin: 0;
+    height: 8vh;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    background-color: #e6e6e6;
+}

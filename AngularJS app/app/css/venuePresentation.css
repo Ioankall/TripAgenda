@@ -1,0 +1,130 @@
+#presentationWindow{
+	background-color: white;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	background-size: cover;
+	color: black;
+	height:100vh;
+	margin: 0;
+}
+
+#topBar{
+	padding-top: 1.5vh;
+	padding-bottom: 1.5vh;
+	float: right;
+	background-color: white;
+	height: 7vh;
+	width: 100%;
+	margin: 0;
+}
+
+#topBarText{
+	color: grey;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1vh;
+}
+
+#firstCollumnPresentation{
+	padding: 0;
+	background-color: #e6e6e6; 
+	height: 85vh;
+	overflow: auto;
+}
+
+.venueShortDescription{
+	padding: 1vh;
+	width: 90%;
+	min-height: 16vh;
+	overflow: hidden;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1.3vh;
+	margin-bottom: 1.3vh;
+	background-color: white;
+}
+
+.venueShortDescriptionText{
+	padding: 0;
+	margin: 0;
+}
+
+#secondCollumnPresentation{
+	border-style: solid;
+	border-color: white;
+	border-width: 0 10px 0 10px;
+	background-color: #e6e6e6; 
+	height: 85vh;
+	overflow: auto;
+	padding: 0;
+}
+	
+#thirdCollumnPresentation{
+	background-color: #e6e6e6; 
+	height: 85vh;
+	padding: 0;
+}
+
+#displayedVenueTitle{
+	background-color: #d9d9d9;
+	width: 100%;
+	margin:0;
+	height: 7vh;
+	padding: 2vh;
+}
+
+#toolbar{
+	width: 100%;
+	margin: 0;
+    height: 7vh;
+	background-color: #d9d9d9;
+	padding-top: 1.5vh;
+    padding-bottom: 1.5vh;
+}
+
+.comment{
+    background-color: snow;
+	width: 100%;
+	margin-top: 2vh;
+	margin-bottom: 2vh;
+	min-height: 8vh;
+	border-radius: 5%;
+	padding: 2%;
+}
+
+#thirdCollumnHeader{
+	width: 100%;
+	margin: 0;
+	height: 7vh;
+	background-color: #d9d9d9;
+	padding-top: 1vh;
+}
+#thirdCollumnList{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	height: 70vh;
+	overflow: auto;
+}
+
+#thirdCollumnFooter{
+	width: 100%;
+	margin: 0;
+	height: 9vh;
+	padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.dialogdemoBasicUsage #popupContainer {
+	position: relative; }
+.dialogdemoBasicUsage .footer {
+	width: 100%;
+	text-align: center;
+	margin-left: 20px; }
+.dialogdemoBasicUsage .footer, .dialogdemoBasicUsage .footer > code {
+	font-size: 0.8em;
+	margin-top: 50px; }
+.dialogdemoBasicUsage button {
+	width: 200px; }
+.dialogdemoBasicUsage div#status {
+	color: #c60008; }

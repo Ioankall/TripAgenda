@@ -1,0 +1,272 @@
+<div ng-controller="TripViewerCtrl" ng-init="getTrip()">
+
+    <div id='topBar'>
+        <div class='col-md-8'>
+            <h4 id='topBarText'>Trip to {{selectedTrip['city']}}, {{selectedTrip['startDate']}} - {{selectedTrip['endDate']}}</h4>
+        </div>
+    </div>
+
+    <div id="'mainContent">
+
+        <div class="col-md-4" id="selectedVenues">
+
+            <div class="subtitle">
+                <center><h4>Interesting places</h4></center>
+            </div>
+
+            <div class="venueShortDescription" ng-repeat="venue in selectedVenues  | unique: 'name' " ng-click="selectVenue(venue['_id'])">
+                <div class="col-md-4">
+                    <img src="{{venue.photos[0]}}" alt="{{venue.name}} photo" style="height:14vh;width:100%;" />
+                </div>
+                <div class="col-md-8 venueShortDescriptionText">
+                    <h4>{{venue.name}}</h4>
+                    <p> <strong>Category:</strong> {{venue.categories}}</p>
+                    <p> <strong>Location:</strong> {{venue.address}}, {{venue.postalCode}}, {{venue.city}}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4" id="information">
+
+            <div class="subtitle" ng-show="venueSelected">
+                <center><h4>{{selectedVenue.name}}</h4></center>
+            </div>
+
+            <div class="subtitle" ng-show="activitySelected">
+                <center><h4>{{selectedActivity.activityName}}</h4></center>
+            </div>
+
+
+            <div style="margin-top:3vh;margin-bottom:3vh;height:35vh;width:90%;margin-left:auto;margin-right:auto;" ng-show="venueSelected">
+                <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                    <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                        <img ng-src="{{slide.image}}" style="height:35vh;width:auto;margin:auto;">
+                    </uib-slide>
+                </uib-carousel>
+            </div>
+
+            <div style="margin-top:3vh;margin-bottom:3vh;height:35vh;width:90%;margin-left:auto;margin-right:auto;" ng-show="activitySelected">
+                <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                    <uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                        <img ng-src="{{slide.image}}" style="height:35vh;width:auto;margin:auto;">
+                    </uib-slide>
+                </uib-carousel>
+            </div>
+
+            <div style="width:90%;margin-left:auto;margin-right:auto;margin-bottom:5vh;" ng-show="venueSelected">
+
+                <div style="height: 11vh;padding-top:3%;padding-left:4%;padding-right:4%;width:100%;margin-left:auto;margin-right:auto;margin-bottom: 3vh;background-color:snow;">
+
+                    <div id="urls" style="padding-bottom:4vh;">
+
+                        <div ng-show="selectedVenue.url" style="width:20%; margin-left:10%;float: left;">
+                            <a target="_blank" href="{{selectedVenue.url}}">
+                                <center><img src="../img/www.png" style="width:7vh;height:7vh;"></center>
+                            </a>
+                        </div>
+
+                        <div ng-show="selectedVenue.facebookID" style="width:20%; margin-left:10%;float: left;">
+                            <a target="_blank" href="http://www.facebook.com/{{selectedVenue.facebookID}}">
+                                <center><img src="../img/fb.jpg" style="width:7vh;height:7vh;"></center>
+                            </a>
+                        </div>
+
+                        <div ng-show="selectedVenue.foursquareID" style="width:20%; margin-left:10%;float: left;">
+                            <a target="_blank" href="http://www.foursquare.com/v/{{selectedVenue.foursquareID}}">
+                                <center><img src="../img/fs.png" style="width:7vh;height:7vh;"></center>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+                    <p><strong>Category:</strong> {{selectedVenue.categories}}</p>
+
+                    <p><strong>Location:</strong> {{selectedVenue.address}}, {{selectedVenue.postalCode}}, {{selectedVenue.city}}</p>
+
+                    <p ng-show="selectedVenue.phoneNumber"><strong>Phone:</strong> {{selectedVenue.phoneNumber}}</p>
+
+                </div>
+
+                <div style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+                    <p><strong>Popularity score:</strong> {{selectedVenue.popularityScore}}</p>
+
+                    <p><strong>Ratings:</strong> {{selectedVenue.rating}}</p>
+
+                    <p><strong>Coming-back ratio:</strong> {{selectedVenue.comingBackRatio}}</p>
+
+                </div>
+
+                <div  style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+                    <p><strong>Facebook Likes:</strong> {{selectedVenue.facebookLikes}}</p>
+
+                    <p><strong>Facebook Were Here:</strong> {{selectedVenue.facebookWereHereCount}}</p>
+
+                    <p><strong>Facebook Talking About:</strong> {{selectedVenue.facebookTalkingAboutCount}}</p>
+
+                </div>
+
+                <div style="margin-bottom:3vh;height:20vh;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow; overflow: auto">
+
+                        <p><strong>Foursquare Rating:</strong> {{selectedVenue.foursquareRating}}</p>
+
+                        <p><strong>Foursquare Checkins:</strong> {{selectedVenue.foursquareCheckins}}</p>
+
+                        <p><strong>Foursquare Likes:</strong> {{selectedVenue.foursquareLikes}}</p>
+
+                        <p><strong>Foursquare Tips:</strong> {{selectedVenue.foursquareTips}}</p>
+
+                        <p><strong>Foursquare Visits:</strong> {{selectedVenue.foursquareVisits}}</p>
+
+                        <p><strong>Foursquare Users:</strong> {{selectedVenue.foursquareUsers}}</p>
+
+                </div>
+                <div ng-show="selectedVenue.tags" style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+                    <p><strong>Desctiption tags:</strong> {{selectedVenue.tags}}</p>
+
+                </div>
+
+                <div style="margin-top:5vh;margin-bottom:3vh;width:100%;margin-left:auto;margin-right:auto;background-color: #e6e6e6;"ng-show="selectedVenue.comments.length">
+                    <center><h4>Comments:<h4></center>
+                    <div class="comment" ng-repeat="comment in selectedVenue.comments">
+                        {{comment}}
+                    </div>
+                </div>
+
+            </div>
+
+            <div style="width:90%;margin-left:auto;margin-right:auto;margin-bottom:5vh;" ng-show="activitySelected">
+
+                <div  ng-show="activitySelected" style="height: 11vh;padding-top:3%;padding-left:4%;padding-right:4%;width:100%;margin-left:auto;margin-right:auto;margin-bottom: 3vh;background-color:snow;">
+
+                    <div style="padding-bottom:4vh;">
+
+                        <p><strong>Scheduled day:</strong>{{dayOfActivity}}</p>
+                        <p><strong>Scheduled time:</strong>{{timeOfActivity}}</p>
+                        <p ng-show="selectedActivity.activityNotes.length"><strong>Notes:</strong>{{selectedActivity.activityNotes}}</p>
+
+                    </div>
+
+                </div>
+
+                <div style="height: 11vh;padding-top:3%;padding-left:4%;padding-right:4%;width:100%;margin-left:auto;margin-right:auto;margin-bottom: 3vh;background-color:snow;">
+
+                    <div id="urls" style="padding-bottom:4vh;">
+
+
+                        <div ng-show="selectedActivity.venue.url" style="width:20%; margin-left:10%;float: left;">
+                            <a target="_blank" href="{{selectedActivity.venue.url}}">
+                                <center><img src="../img/www.png" style="width:7vh;height:7vh;"></center>
+                            </a>
+                        </div>
+
+                        <div ng-show="selectedActivity.venue.facebookID" style="width:20%; margin-left:10%;float: left;">
+                            <a target="_blank" href="http://www.facebook.com/{{selectedActivity.venue.facebookID}}">
+                                <center><img src="../img/fb.jpg" style="width:7vh;height:7vh;"></center>
+                            </a>
+                        </div>
+
+                        <div ng-show="selectedActivity.venue.foursquareID" style="width:20%; margin-left:10%;float: left;">
+                            <a target="_blank" href="http://www.foursquare.com/v/{{selectedActivity.venue.foursquareID}}">
+                                <center><img src="../img/fs.png" style="width:7vh;height:7vh;"></center>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+                    <p><strong>Category:</strong> {{selectedActivity.venue.categories}}</p>
+
+                    <p><strong>Location:</strong> {{selectedActivity.venue.address}}, {{selectedActivity.venue.postalCode}}, {{selectedActivity.venue.city}}</p>
+
+                    <p ng-show="selectedActivity.venue.phoneNumber"><strong>Phone:</strong> {{selectedActivity.venue.phoneNumber}}</p>
+
+                </div>
+
+                <div style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+                    <p><strong>Popularity score:</strong> {{selectedActivity.venue.popularityScore}}</p>
+
+                    <p><strong>Ratings:</strong> {{selectedActivity.venue.rating}}</p>
+
+                    <p><strong>Coming-back ratio:</strong> {{selectedActivity.venue.comingBackRatio}}</p>
+
+                </div>
+
+                <div  style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+                    <p><strong>Facebook Likes:</strong> {{selectedActivity.venue.facebookLikes}}</p>
+
+                    <p><strong>Facebook Were Here:</strong> {{selectedActivity.venue.facebookWereHereCount}}</p>
+
+                    <p><strong>Facebook Talking About:</strong> {{selectedActivity.venue.facebookTalkingAboutCount}}</p>
+
+                </div>
+
+                <div style="margin-bottom:3vh;height:20vh;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+                    <div class="col-md-6">
+                        <p><strong>Foursquare Rating:</strong> {{selectedActivity.venue.foursquareRating}}</p>
+
+                        <p><strong>Foursquare Checkins:</strong> {{selectedActivity.venue.foursquareCheckins}}</p>
+
+                        <p><strong>Foursquare Likes:</strong> {{selectedActivity.venue.foursquareLikes}}</p>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-5">
+                        <p><strong>Foursquare Tips:</strong> {{selectedActivity.venue.foursquareTips}}</p>
+
+                        <p><strong>Foursquare Visits:</strong> {{selectedActivity.venue.foursquareVisits}}</p>
+
+                        <p><strong>Foursquare Users:</strong> {{selectedActivity.venue.foursquareUsers}}</p>
+                    </div>
+                </div>
+                <div ng-show="selectedActivity.venue.tags" style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+                    <p><strong>Desctiption tags:</strong> {{selectedActivity.venue.tags}}</p>
+
+                </div>
+
+                <div style="margin-top:5vh;margin-bottom:3vh;width:100%;margin-left:auto;margin-right:auto;background-color: #e6e6e6;"ng-show="selectedActivity.venue.comments.length">
+                    <center><h4>Comments:<h4></center>
+                    <div class="comment" ng-repeat="comment in selectedActivity.venue.comments">
+                        {{comment}}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4" id="scheduledActivities">
+
+            <div class="subtitle" >
+                <center><h4>Scheduled activities</h4></center>
+            </div>
+
+            <div class="venueShortDescription" ng-repeat="activity in scheduledActivities " ng-click="selectActivity(activity['_id'])">
+                <div class="col-md-4">
+                    <img src="{{activity.venue.photos[0]}}" alt="{{activity.venue.name}} photo" style="height:14vh;width:100%;" />
+                </div>
+                <div class="col-md-8 venueShortDescriptionText">
+                    <h4>{{activity.activityName}}</h4>
+                    <p> <strong>Venue:</strong> {{activity.venue.name}}</p>
+                    <p> <strong>Scheduled at:</strong> {{activity.activityDay}}, {{activity.activityStartingTime}}, {{activity.activityEndingTime}}</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

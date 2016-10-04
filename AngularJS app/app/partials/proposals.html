@@ -1,0 +1,192 @@
+<div id='proposalsContainer' ng-controller="ProposalsCtrl">
+
+	<div id='topBar'>
+		<div class='col-md-10'>
+			<h4 id='topBarText'>Let us make some personilized recommendations. The choice is always yours!</h4>
+		</div>
+		<div class='col-md-2'>
+			<center><button style="width:100%;" id='finalizeButton' type="button" ng-click="deleteCurrentTrip()" class="btn btn-danger">Cancel trip</button></center>
+		</div>
+	</div>
+
+	<div class='col-md-10' id='leftSide'>
+
+		<div id="mainContent">
+
+			<div id='firstCollumnPresent' class='col-md-5'>
+					<div id='toolbar'>
+						<div class="col-md-6"
+							<center>
+								<select ng-model="chosenCategory" class="form-control" style="height: 4vh;width:100%;" ng-change="updateCategory()">
+									<option value="" disabled selected hidden>Category</option>
+									<option ng-repeat="category in categoriesList" value="{{ category }}">
+										{{ category }}
+									</option>
+								</select>
+							</center>
+						</div>
+						<div class="col-md-7"></div>
+					</div>
+
+					<div class="venueShortDescription" ng-repeat="venue in recommendedVenues" ng-click="showVenueDetails(venue[0]['_id'])">
+						<div class="col-md-4">
+							<img src="{{venue[0].photos[0]}}" alt="{{venue[0].name}} photo" style="height:14vh;width:100%;" />
+						</div>
+						<div class="col-md-8 venueShortDescriptionText">
+							<h4>{{venue[0].name}}</h4>
+							<p> <strong>Category:</strong> {{venue[0].categories}}</p>
+							<p> <strong>Location:</strong> {{venue[0].address}}, {{venue[0].postalCode}}, {{venue[0].city}}</p>
+						</div>
+					</div>
+
+			</div>
+
+			<div id='secondCollumnPresent' class='col-md-7'>
+
+
+				<div id="displayedVenueTitle">
+					<div class="col-md-3">
+						<center><button id='blockVenue' type="button" ng-show="displayedVenue" ng-click="remove(displayedVenue)" class="btn btn-danger">Block venue</button></center>
+					</div>
+					<div class="col-md-6" style="text-align: center;"><h4>{{displayedVenue.name}}</h4></div>
+					<div class="col-md-3">
+						<center><button id='addToListBtn' type="button" ng-show="displayedVenue" ng-click="addToList(displayedVenue)" class="btn btn-success">Add to List</button></center>
+					</div>
+				</div>
+
+
+
+				<div style="margin-top:3vh;margin-bottom:3vh;height:35vh;width:90%;margin-left:auto;margin-right:auto;" ng-show="displayedVenue">
+					<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+						<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+							<img ng-src="{{slide.image}}" style="height:35vh;width:auto;margin:auto;">
+						</uib-slide>
+					</uib-carousel>
+				</div>
+
+				<div style="width:90%;margin-left:auto;margin-right:auto;margin-bottom:5vh;">
+
+					<div ng-show="displayedVenue" style="height: 11vh;padding-top:3%;padding-left:4%;padding-right:4%;width:100%;margin-left:auto;margin-right:auto;margin-bottom: 3vh;background-color:snow;">
+
+						<div id="urls" style="padding-bottom:4vh;">
+
+							<div ng-show="displayedVenue.url" style="width:20%; margin-left:10%;float: left;">
+								<a target="_blank" href="{{displayedVenue.url}}">
+									<center><img src="../img/www.png" style="width:7vh;height:7vh;"></center>
+								</a>
+							</div>
+
+							<div ng-show="displayedVenue.facebookID" style="width:20%; margin-left:10%;float: left;">
+								<a target="_blank" href="http://www.facebook.com/{{displayedVenue.facebookID}}">
+									<center><img src="../img/fb.jpg" style="width:7vh;height:7vh;"></center>
+								</a>
+							</div>
+
+							<div ng-show="displayedVenue.foursquareID" style="width:20%; margin-left:10%;float: left;">
+								<a target="_blank" href="http://www.foursquare.com/v/{{displayedVenue.foursquareID}}">
+									<center><img src="../img/fs.png" style="width:7vh;height:7vh;"></center>
+								</a>
+							</div>
+
+						</div>
+					</div>
+
+					<div ng-show="displayedVenue" style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+						<p><strong>Category:</strong> {{displayedVenue.categories}}</p>
+
+						<p><strong>Location:</strong> {{displayedVenue.address}}, {{displayedVenue.postalCode}}, {{displayedVenue.city}}</p>
+
+						<p ng-show="displayedVenue.phoneNumber"><strong>Phone:</strong> {{displayedVenue.phoneNumber}}</p>
+
+					</div>
+
+					<div ng-show="displayedVenue" style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+						<p><strong>Popularity score:</strong> {{displayedVenue.popularityScore}}</p>
+
+						<p><strong>Ratings:</strong> {{displayedVenue.rating}}</p>
+
+						<p><strong>Coming-back ratio:</strong> {{displayedVenue.comingBackRatio}}</p>
+
+					</div>
+
+					<div  ng-show="displayedVenue" style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+						<p><strong>Facebook Likes:</strong> {{displayedVenue.facebookLikes}}</p>
+
+						<p><strong>Facebook Were Here:</strong> {{displayedVenue.facebookWereHereCount}}</p>
+
+						<p><strong>Facebook Talking About:</strong> {{displayedVenue.facebookTalkingAboutCount}}</p>
+
+					</div>
+
+					<div ng-show="displayedVenue" style="margin-bottom:3vh;height:20vh;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+						<div class="col-md-6">
+							<p><strong>Foursquare Rating:</strong> {{displayedVenue.foursquareRating}}</p>
+
+							<p><strong>Foursquare Checkins:</strong> {{displayedVenue.foursquareCheckins}}</p>
+
+							<p><strong>Foursquare Likes:</strong> {{displayedVenue.foursquareLikes}}</p>
+						</div>
+						<div class="col-md-1"></div>
+						<div class="col-md-5">
+							<p><strong>Foursquare Tips:</strong> {{displayedVenue.foursquareTips}}</p>
+
+							<p><strong>Foursquare Visits:</strong> {{displayedVenue.foursquareVisits}}</p>
+
+							<p><strong>Foursquare Users:</strong> {{displayedVenue.foursquareUsers}}</p>
+						</div>
+					</div>
+					<div ng-show="displayedVenue.tags" style="margin-bottom:3vh;height:auto;padding:4%;width:100%;margin-left:auto;margin-right:auto;background-color:snow;">
+
+						<p><strong>Desctiption tags:</strong> {{displayedVenue.tags}}</p>
+
+					</div>
+
+					<div style="margin-top:5vh;margin-bottom:3vh;width:100%;margin-left:auto;margin-right:auto;background-color: #e6e6e6;"ng-show="displayedVenue.comments.length">
+						<center><h4>Comments:<h4></center>
+						<div class="comment" ng-repeat="comment in displayedVenue.comments">
+							{{comment}}
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		
+	</div>
+
+	<div id="thirdCollumn" class='col-md-2' style="padding:0;">
+
+		<div id="SelectedVenuesHeader">
+			<div style="text-align: center;">
+				<h4>
+					Interesting places
+				</h4>
+			</div>
+		</div>
+
+		<div id="SelectedVenuesList"">
+			<table class="table table-striped table-bordered table-hover table-condensed">
+				<tr ng-repeat="venue in listOfSelectedVenues" ng-click="removeFromList(venue)">
+					<td>{{venue.name}}</td>
+				</tr>
+			</table>
+		</div>
+
+		<div id="SelectedVenuesFooter">
+			<center><button id='proceedBtn' style="height: 4vh; "type="button" ng-click="proceed()" class="btn btn-success">Continue planning your trip!</button></center>
+		</div>
+	</div>
+
+	<div id="venuesDetails">
+
+
+	</div>
+
+</div>
+

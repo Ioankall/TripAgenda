@@ -1,0 +1,36 @@
+#loginpage{
+	background: linear-gradient( rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) ),url("../img/loginBackground2.jpg") no-repeat center center fixed;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	background-size: cover;
+	color: white;
+	height: 96vh;
+	width: 100%;
+	padding-top: 35vh;
+}
+
+#loginform{
+    background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), no-repeat center center fixed;
+	width: 45%;
+	max-width: 500px;
+    padding: 3%;
+}
+
+#loginbutton{
+	width: 30%;
+    margin-right: 5%;
+}
+
+#registerlink{
+	text-align: center;
+	margin-top: 4vh;
+}
+
+.error{
+	border-radius: 7%;
+	margin-top: 2vh;
+	background-color: red;
+	color:white;
+	text-align: center;
+	font-size: 140%;
+}

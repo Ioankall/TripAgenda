@@ -1,0 +1,25 @@
+<div id='loginpage' ng-controller="LoginCtrl">
+	<center>
+        <div id='loginform'>
+
+            <legend style='color:white; margin-bottom:2vh; text-align:center;'>Sign in, and start planning your trip!</legend>
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Username" ng-model="user.username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" ng-model="user.password">
+            </div>
+
+            <div class='error'>{{ errorMessage }}</div>
+
+
+
+            <h4 id='registerlink'><button id='loginbutton' type="button" ng-click="login()" class="btn btn-success">Sign in</button>  or  just <a href='./#/register'>Register now!</a></h4>
+
+	    </div>
+    </center>
+</div>

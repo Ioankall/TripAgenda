@@ -1,0 +1,33 @@
+<div id='registerpage' ng-controller="RegisterCtrl">
+	<center>
+	<div id='registerform'>
+		<legend style='color:white; margin-bottom:2vh; text-align:center;'>Register now, and start planning your trip!</legend>
+	
+		<div class="form-group">
+			<label for="username">Username</label>
+			<input type="text" class="form-control" id="username" placeholder="Username" ng-model="user.username">
+		</div>
+ 
+		<div class="form-group">
+			<label for="name">Name</label>
+			<input type="text" class="form-control" id="name" placeholder="Name" ng-model="user.name">
+		</div>
+		
+		<div class="form-group">
+			<label for="email">E-mail</label>
+			<input type="email" class="form-control" id="email" placeholder="yourname@email.com" ng-model="user.email">
+		</div>
+ 
+		<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" class="form-control" id="password" placeholder="Password" ng-model="user.password">
+		</div>
+		
+		<div class='error'> {{ errorMessage }} </div>
+		
+		<button id='registerbutton' type="button" ng-click="register()" class="btn btn-success">Sign up</button>
+		
+		<h4 id='loginlink'>Already signed up? <a href='./#/login'>Log in now!</a></h4>
+	</div>
+	</center>
+</div>

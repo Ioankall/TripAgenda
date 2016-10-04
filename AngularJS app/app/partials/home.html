@@ -1,0 +1,34 @@
+<div id='homepage' ng-controller="TripViewerCtrl" ng-init="refresh()">
+	<div id="middleLevel">
+  	<div id='innerWindow'>
+  
+		<center><h3 id='title'>Your saved trips:</h3></center>
+		
+		<!-- A fake table: should be removed in the future -->
+		
+		<div id='savedtrips'>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>City</th>
+					<th>Start date</th>
+					<th>End date</th>
+					<th><center>Link</center></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="trip in trips">
+					<td>{{trip.city}}</td>
+					<td>{{trip.startDate}}</td>
+					<td>{{trip.endDate}}</td>
+					<td><center><button type="button" ng-click="view(trip['_id'])" class="btn btn-info viewbutton">View</button></center></td>
+				</tr>
+			</tbody>
+		</table>
+		</div>
+  
+		<center><a href='./#/tripcreator'><button id='registerbutton' type="button" class="btn btn-success">Create new trip</button></a></center>
+  	</div>
+	</div>
+
+</div>

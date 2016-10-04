@@ -1,0 +1,112 @@
+#tripcreatorcontainer{
+	background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url("../img/loginBackground3.jpg") no-repeat center center fixed;
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	background-size: cover;
+	color: white;
+	height:96vh;
+	width:100%;
+	display: table;
+	position: absolute;
+}
+
+#middleLevel{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#innerSelectCityWindow{
+	background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), no-repeat center center fixed;
+	margin-left: auto;
+	margin-right: auto;
+	height: 60vh;
+	width:50%;
+	min-height: 550px;
+	min-width: 800px;
+	padding: 1% 5% 0 5%;
+	z-index: 99;
+}
+
+
+#loader{
+	margin-top: 3vh;
+	width: 5500px;
+}
+.md-autocomplete-suggestions-container{
+	overflow-y:scroll;
+	width:100%;
+}
+
+.md-autocomplete-suggestions-container .md-virtual-repeat-scroller{
+	position:static;
+	width:100%;
+}
+
+.md-autocomplete-suggestions-container .md-virtual-repeat-sizer{
+	height:0 !important;
+	width:100%;
+}
+
+.md-autocomplete-suggestions-container .md-virtual-repeat-offsetter{
+	position:static;
+	width:100%;
+}
+
+.md-virtual-repeat-container.md-autocomplete-suggestions-container {
+	width:30%;
+	max-width: 30% !important;
+	position: fixed;
+	z-index: 999;
+	overflow: inherit;
+}
+
+.autocomplete{
+	width: 100%;
+}
+
+#citySelector{
+	width:80%;
+}
+
+
+#citySearchText{
+	color: black;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+#categoriesLabel, #dateslabel{
+	color: white;
+	text-align: center;
+	margin-bottom: 10%;
+}
+
+
+#categoriesList{
+	float: left;
+	width:35%;
+	margin: 3% 5% 0 10%;
+	font-size:110%;
+}
+
+.colorblack{
+	text-align: center;
+	color: black;
+	margin: 5%;
+}
+
+#dates{
+	float: left;
+	margin: 3% 5% 0 5%;
+	width: 34%;
+}
+#startselectingvenuesbtn{
+	text-align: center;
+	width: 30%;
+	margin-top: 2vh;
+}
+
+
+
+

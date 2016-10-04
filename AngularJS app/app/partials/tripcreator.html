@@ -1,0 +1,109 @@
+<div id='tripcreatorcontainer'>
+
+    <div id="middleLevel">
+  
+	<div id='innerSelectCityWindow'  name='tripCreator_1'  ng-controller="TripCreatorCtrl">
+	
+		<div style='text-align:center;'>
+			<h3>
+				Select your destination:
+			</h3>
+		</div>
+
+        <center><div id="citySelector">
+		<md-autocomplete id="citySearchText" md-menu-class="autocomplete" ng-disabled="isDisabled" md-no-cache="false" md-selected-item="selectedItem" md-search-text-change="searchTextChange(searchText)" md-search-text="searchText" md-selected-item-change="selectedItemChange(item)" md-items="item in querySearch(searchText)" md-item-text="item.display" md-min-length="0" placeholder="Select your destination...">
+			<md-item-template>
+				<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+			</md-item-template>
+			<md-not-found>
+				No states matching "{{ctrl.searchText}}" were found.
+				<a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+			</md-not-found>
+		</md-autocomplete>
+        </div></center>
+		
+		<div id="centerDiv" style="height:350px;">
+			<div id='categoriesList'>
+				<h4 id='categoriesLabel'>What are you interested in?</h4>
+		
+				<table id='categories'>
+					<tr>
+						<td><label>Arts & Entertainment:</label></td>
+						<td><input type="checkbox" ng-model="artsAndEntertainment"></td>
+					</tr>
+					<tr>
+						<td><label>Museums:</label></td>
+						<td><input type="checkbox" ng-model="museums"></td>
+					</tr>
+					<tr>
+						<td><label>Nightlife:</label></td>
+						<td><input type="checkbox" ng-model="nightlife"></td>
+					</tr>
+					<tr>
+						<td><label>Food & Drink:</label></td>
+						<td><input type="checkbox" ng-model="foodAndDrink"></td>
+					</tr>
+					<tr>
+						<td><label>Public places:</label></td>
+						<td><input type="checkbox" ng-model="publicPlaces"></td>
+					</tr>
+					<tr>
+						<td><label>Shopping:</label></td>
+						<td><input type="checkbox" ng-model="shopping"></td>
+					</tr>
+					<tr>
+						<td><label>Transportation & Accomondation:</label></td>
+						<td><input type="checkbox" ng-model="transportationAndAccomondation"></td>
+					</tr>
+					<tr>
+						<td><label>Religion and Organizations:</label></td>
+						<td><input type="checkbox" ng-model="religionAndOrganizations"></td>
+					</tr>
+				</table>
+			</div>
+		
+			<div id='dates'>
+				<h4 id='datesLabel'>Select your trip days</h4>
+
+				<label class='labelWhite'>Arrival day:</label> 
+				<center>
+                    <div>
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        </p>
+                    </div>
+                 </center>
+
+				<label class='labelWhite'>Departure day:</label> 
+                <center>
+                    <div>
+                        <p class="input-group">
+                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt2" name="dt2" is-open="popup2.opened" datepicker-options="dateOptions2" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        </p>
+                    </div>
+                </center>
+
+			</div>
+
+		</div>
+
+		<div id='button'>
+			<center><button id='startselectingvenuesbtn' type="button" ng-click="create()" class="btn btn-success">Select venues</button></center>
+		</div>
+		
+		<div id='loader' ng-show="isLoading">
+			<center><img src="../img/loader.gif" alt="Loading..."></center>
+		</div>
+
+    </div>
+
+    </div>
+    
+</div>
+
