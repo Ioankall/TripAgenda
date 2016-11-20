@@ -385,8 +385,6 @@ myApp.controller("TripCreatorCtrl", ['$scope', '$window', '$timeout', '$q', '$lo
           // On submit function
 
           $scope.create = function(){
-
-
               if($scope.selectedItem == null){
                   alert("Please select a city and try again.");
               }else if(!($scope.artsAndEntertainment || $scope.museums || $scope.nightlife || $scope.publicPlaces || $scope.shopping || $scope.foodAndDrink || $scope.transportationAndAccomondation || $scope.religionAndOrganizations)){
@@ -399,11 +397,8 @@ myApp.controller("TripCreatorCtrl", ['$scope', '$window', '$timeout', '$q', '$lo
                   alert("Your trip dates are not valid. Please try again.");
               }else{
                   $scope.isLoading = true;
-
                   tripCreator.setCity($scope.selectedItem.display);
-
-                  var categories =
-                  {
+                  var categories = {
                       "artsAndEntertainment": $scope.artsAndEntertainment,
                       "museums": $scope.museums,
                       "nightlife": $scope.nightlife,
@@ -413,31 +408,20 @@ myApp.controller("TripCreatorCtrl", ['$scope', '$window', '$timeout', '$q', '$lo
                       "transportationAndAccomondation": $scope.transportationAndAccomondation,
                       "religionAndOrganizations": $scope.religionAndOrganizations
                   };
-
                   tripCreator.setCategories(categories);
-
-
                   var startDate = toDateFormat($scope.dt.getDate(), $scope.dt.getMonth()+1, $scope.dt.getYear() + 1900);
                   var endDate = toDateFormat($scope.dt2.getDate(), $scope.dt2.getMonth()+1, $scope.dt2.getYear() + 1900);
-
-
-                  var dates =
-                  {
+                  var dates = {
                       "startDate": startDate,
                       "endDate": endDate
                   };
-
-                  console.log(dates);
-
                   tripCreator.setDates(dates);
-
                   $window.currentTrip = {
                       tripDates: dates,
                       tripCategories: categories,
                       tripDestination: $scope.selectedItem.display,
                       selectedVenues: []
                   };
-
                   tripCreator.downloadVenuesAndProceed($window);
               }
 
@@ -873,20 +857,15 @@ myApp.controller("SchedulerCtrl", ['$scope', '$window', 'supportedCities', 'trip
         };
 
 
-        //Set arrival/departure and resting times and update scheduler
 
         var arrivalTime, departureTime, startRestingTime, endRestingTime;
 
-
+        //Set arrival/departure and resting times and update scheduler
         $scope.setArrivalTime = function(){
-
             var time = $scope.firstDayArrival;
             var id ="";
-
             if(arrivalTime != "" && arrivalTime != undefined){
-
                 if(startRestingTime != undefined && startRestingTime != 0 && startRestingTime > arrivalTime){
-
                     for(i=0; i<startRestingTime; i++){
                         if(i==0){
                             id = "day1_0";
@@ -897,9 +876,7 @@ myApp.controller("SchedulerCtrl", ['$scope', '$window', 'supportedCities', 'trip
                             document.getElementById(id).style.background = "#e6e6e6";
                         }
                     }
-
                 }else{
-
                     for(i=0; i<24; i++){
                         if(i==0){
                             id = "day1_0";
@@ -910,13 +887,8 @@ myApp.controller("SchedulerCtrl", ['$scope', '$window', 'supportedCities', 'trip
                             document.getElementById(id).style.background = "#e6e6e6";
                         }
                     }
-
                 }
-
-
             }
-
-
             for(i=0; i<time; i++){
                 if(i==0){
                     id = "day1_0";
@@ -925,12 +897,8 @@ myApp.controller("SchedulerCtrl", ['$scope', '$window', 'supportedCities', 'trip
                 }
                 document.getElementById(id).style.background = "red";
             }
-
             arrivalTime = time;
-
             $scope.checkWhatCollumnsToDisplay();
-
-
         };
 
         $scope.setDepartureTime = function(){
@@ -1459,16 +1427,44 @@ myApp.controller("SchedulerCtrl", ['$scope', '$window', 'supportedCities', 'trip
     }
 ]);
 
-myApp.controller("Page3Ctrl", ['$scope', 'dataFactory',
-  function($scope, dataFactory) {
-    $scope.venues = [];
- 
-    // Access the factory and get the latest products list
-    dataFactory.getVenues().then(function(data) {
-		console.log( JSON.stringify(data.data.venues) );
-        $scope.venues = data.data.venues;
-    });
- 
-  }
-]);
+myApp.controller("AdminCtrl", ['$scope', '$window', 'supportedCities',
+    function($scope, $window, supportedCities) {
+        $scope.name = "Admin Controller";
 
+        $scope.tools = {
+            "editCities" : false
+        };
+
+        $scope.cities = [];
+
+        supportedCities.getCities().then(function(data) {
+            $scope.cities = data.data.cities;
+        });
+
+        $scope.showCitySelector = function (action) {
+            if(action == "edit" || action == "delete"){
+                return true;
+            }else{
+                return false;
+            }
+        };
+
+        $scope.openTool = function(page){
+            //make all tools false
+            $scope.tools.editCities = false;
+
+            //make selected tool true
+            if(page = "editCities"){
+                $scope.tools.editCities = true;
+
+
+            }
+        };
+
+
+
+
+
+
+    }
+]);

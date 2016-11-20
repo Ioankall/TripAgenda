@@ -1,0 +1,63 @@
+<div id='adminPage' ng-controller="AdminCtrl">
+
+    <div class="col-md-2" id="adminToolbar">
+
+        <ul>
+            <li ng-click="openTool(editCities)"> Manage supported cities </li>
+            <li>News</li>
+            <li>Contact</li>
+            <li>About</li>
+        </ul>
+
+    </div>
+
+    <div class="col-md-10" id="adminMainPage">
+
+        <div ng-show="tools.editCities">
+
+            <div id="editCitiesChoices">
+                <p style="display:inline-block;">Select an action: </p>
+                <select ng-model="selectedAction" >
+                    <option selected value="none"></option>
+                    <option value="add">
+                        Add a city
+                    </option>
+                    <option value="delete">
+                        Delete a city
+                    </option>
+                    <option value="edit">
+                        Edit a city
+                    </option>
+                </select>
+
+                <p style="margin-left: 30px; display:inline-block;" ng-show="showCitySelector(selectedAction)">Select a city: </p>
+                <select ng-model="selectedCity" ng-show="showCitySelector(selectedAction)">
+                    <option selected value="none"></option>
+                    <option ng-repeat="city in cities" value="city.city">
+                        {{city.city}}
+                    </option>
+                </select>
+            </div>
+
+            <div id="cityData" class="col-md-6" ng-show="(selectedAction=='add') || (selectedCity!='none' && selectedAction == 'edit')">
+                <p>City name</p>
+                <input class="inputText" type="text" name="name">
+                <p>City latitude</p>
+                <input class="inputText" type="text" name="lat">
+                <p>City longitude</p>
+                <input class="inputText" type="text" name="long">
+                <p>Short description</p>
+                <textarea rows="4" cols="87"></textarea>
+                <p>Detailed description</p>
+                <textarea rows="8" cols="87"></textarea>
+                <p>Image URL</p>
+                <input class="inputText" type="text" name="url">
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</div>

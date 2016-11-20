@@ -27,7 +27,6 @@
 						</div>
 						<div class="col-md-7"></div>
 					</div>
-
 					<div class="venueShortDescription" ng-repeat="venue in recommendedVenues" ng-click="showVenueDetails(venue[0]['_id'])">
 						<div class="col-md-4">
 							<img src="{{venue[0].photos[0]}}" alt="{{venue[0].name}} photo" style="height:14vh;width:100%;" />
@@ -38,12 +37,9 @@
 							<p> <strong>Location:</strong> {{venue[0].address}}, {{venue[0].postalCode}}, {{venue[0].city}}</p>
 						</div>
 					</div>
-
 			</div>
-
+		
 			<div id='secondCollumnPresent' class='col-md-7'>
-
-
 				<div id="displayedVenueTitle">
 					<div class="col-md-3">
 						<center><button id='blockVenue' type="button" ng-show="displayedVenue" ng-click="remove(displayedVenue)" class="btn btn-danger">Block venue</button></center>
@@ -53,9 +49,6 @@
 						<center><button id='addToListBtn' type="button" ng-show="displayedVenue" ng-click="addToList(displayedVenue)" class="btn btn-success">Add to List</button></center>
 					</div>
 				</div>
-
-
-
 				<div style="margin-top:3vh;margin-bottom:3vh;height:35vh;width:90%;margin-left:auto;margin-right:auto;" ng-show="displayedVenue">
 					<uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
 						<uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
@@ -63,31 +56,24 @@
 						</uib-slide>
 					</uib-carousel>
 				</div>
-
 				<div style="width:90%;margin-left:auto;margin-right:auto;margin-bottom:5vh;">
-
 					<div ng-show="displayedVenue" style="height: 11vh;padding-top:3%;padding-left:4%;padding-right:4%;width:100%;margin-left:auto;margin-right:auto;margin-bottom: 3vh;background-color:snow;">
-
 						<div id="urls" style="padding-bottom:4vh;">
-
 							<div ng-show="displayedVenue.url" style="width:20%; margin-left:10%;float: left;">
 								<a target="_blank" href="{{displayedVenue.url}}">
 									<center><img src="../img/www.png" style="width:7vh;height:7vh;"></center>
 								</a>
 							</div>
-
 							<div ng-show="displayedVenue.facebookID" style="width:20%; margin-left:10%;float: left;">
 								<a target="_blank" href="http://www.facebook.com/{{displayedVenue.facebookID}}">
 									<center><img src="../img/fb.jpg" style="width:7vh;height:7vh;"></center>
 								</a>
 							</div>
-
 							<div ng-show="displayedVenue.foursquareID" style="width:20%; margin-left:10%;float: left;">
 								<a target="_blank" href="http://www.foursquare.com/v/{{displayedVenue.foursquareID}}">
 									<center><img src="../img/fs.png" style="width:7vh;height:7vh;"></center>
 								</a>
 							</div>
-
 						</div>
 					</div>
 
@@ -153,11 +139,8 @@
 					</div>
 
 				</div>
-
 			</div>
-
 		</div>
-		
 	</div>
 
 	<div id="thirdCollumn" class='col-md-2' style="padding:0;">

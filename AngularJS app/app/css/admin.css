@@ -1,0 +1,58 @@
+#adminPage {
+    background-color: white;
+}
+
+#adminToolbar {
+    background-color: #f1f1f1;
+    height: 93vh;
+    margin: 0;
+    padding: 0;
+}
+
+#adminMainPage {
+    background-color: white;
+    color: black;
+    height: 93vh;
+    padding: 0;
+}
+
+#adminToolbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#adminToolbar li {
+    display: block;
+    color: #000;
+    height: 5vh;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+#adminToolbar li:hover {
+    background-color: #555;
+    color: white;
+}
+
+#editCitiesChoices {
+    display:inline-block;
+    width: 100%;
+    height: 5vh;
+    background-color: #555;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+#cityData {
+    padding:1%;
+}
+
+#cityData p{
+    margin-top: 8px;
+}
+
+.inputText {
+    width: 100%;
+}

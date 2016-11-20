@@ -1,9 +1,7 @@
 myApp.factory('supportedCities', function($http) {
   
   var urlBase = 'http://snf-703110.vm.okeanos.grnet.gr:3000/api/v1/cities';
-  
   var _prodFactory = {};
- 
   _prodFactory.getCities = function() {
     return $http.get(urlBase);
   }; 
@@ -84,39 +82,27 @@ myApp.factory('tripCreator', function($http, $window) {
 
 	  var start_str = startDate.split('/');
       var end_str = endDate.split('/');
-
 	  var start = [];
 	  var end = [];
-
 	  start[0] = parseInt(start_str[0]);
 	  start[1] = parseInt(start_str[1]);
 	  start[2] = parseInt(start_str[2]);
-
 	  end[0] = parseInt(end_str[0]);
 	  end[1] = parseInt(end_str[1]);
 	  end[2] = parseInt(end_str[2]);
-
-	  console.log("checkpoint 1 -->" + start[1] + " " + end[1]);
       //check if startDate is greater than the endDate.
       if(start[2] > end[2]){
-		  console.log("checkpoint 3");
           return -1;
       }else if(start[2] == end[2]){
           if(start[1] > end[1]){
-			  console.log("checkpoint 4");
               return -1;
           }else if(start[1] == end[1]){
               if(start[0] > end[0]){
-				  console.log("checkpoint 5");
                   return -1;
               }
           }
       }
-
-	  console.log("checkpoint 2");
-
       //find diff
-
       if(start[2] == end[2]){
           //Same year
           if(start[1] == end[1]){
@@ -137,9 +123,7 @@ myApp.factory('tripCreator', function($http, $window) {
       }else{
           //Next year(s)
           var days = 0;
-
           var endOfYear = [31, 12, start[2]];
-
           //days to end of year
           if(start[1] == endOfYear[1]){
               //Same month
@@ -151,7 +135,6 @@ myApp.factory('tripCreator', function($http, $window) {
                   days += parseInt(daysOfMonth(i,start[2]),10);
               }
           }
-          console.log(days);
           var startOfYear = [1, 1, end[2]];
 
           //days to final day
@@ -166,14 +149,11 @@ myApp.factory('tripCreator', function($http, $window) {
                   days += parseInt(daysOfMonth(i,startOfYear[2]),10);
               }
           }
-          console.log(days);
           //if more than one year away
           days += (parseInt(end[2],10) - parseInt(start[2],10) - 1) * 365;
           console.log(days);
           return days;
-
       }
-
   }
 
   
@@ -347,20 +327,12 @@ myApp.factory('tripCreator', function($http, $window) {
   }
   
   function getRecommendationsForCategory(category){
-	  
 	  var recommendations = [];
 	  var tempRecommendations = [];
-	  
 	  var interestedIn = getTagsOfSelectedVenuesByCategory(category);
-	  
-	  console.log("fine with tags!");
 	  var venuesOfCategory = getVenuesOfCategory(category);
-	  console.log("fine with venues!" + venuesOfCategory.length);
-	  
 	  for(i=0; i<venuesOfCategory.length; i++){
-		 
 		 if(!isSelected(venuesOfCategory[i])){
-			
 			var level = 0;
 			var commonTags = [];
 			for(j=0; j<interestedIn.length; j++){
@@ -369,9 +341,7 @@ myApp.factory('tripCreator', function($http, $window) {
 					level += interestedIn[j][1];
 				}
 			}
-			
 			var entry = [venuesOfCategory[i], level, commonTags.join()];
-			
 			if(entry[1]>0 && entry[0].rating>7.5){
 				var found = false;
 				for(z=0; z<recommendations.length;z++){
@@ -387,30 +357,24 @@ myApp.factory('tripCreator', function($http, $window) {
 					recommendations.push(entry);
 				}
 			}
-			
 		 }
 	  }
-	  
 	  recommendations.sort(function(a, b) { 
 		 if (a[1] < b[1]) return 1;
 		 if (a[1] > b[1]) return -1;
 		 return 0;
 	  });
-	  
 	  if(recommendations.length > 15){
 		  tempRecommendations = recommendations.splice(0,15);
 	  }
-	  
 	  tempRecommendations.sort(function(a, b) { 
 		 if (a[0].popularityScore < b[0].popularityScore) return 1;
 		 if (a[0].popularityScore > b[0].popularityScore) return -1;
 		 return 0;
 	  });
-	  
 	  if(tempRecommendations.length > 10){
 		  recommendations = tempRecommendations.splice(0,10);
 	  }
-	  
 	  return recommendations;
   }
     
